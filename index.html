@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #d1e7dd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function clearResult() {
+            document.getElementById("predictionResult").innerHTML = '';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Churn Prediction</h2>
+        <p>Enter the customer's details to predict churn probability.</p>
+        <form method="POST" onsubmit="clearResult()">
+            <label>Age in Years:</label>
+            <input type="number" name="AGE_IN_YEARS" step="any" required>
+
+            <label>Income:</label>
+            <input type="number" name="INCOME" step="any" required>
+
+            <label>Home Owner (1 for Yes, 0 for No):</label>
+            <input type="number" name="HOME_OWNER" min="0" max="1" step="1" required>
+
+            <label>College Degree (1 for Yes, 0 for No):</label>
+            <input type="number" name="COLLEGE_DEGREE" min="0" max="1" step="1" required>
+
+            <label>Good Credit (1 for Yes, 0 for No):</label>
+            <input type="number" name="GOOD_CREDIT" min="0" max="1" step="1" required>
+
+            <label>Marital Status:</label>
+            <select name="MARITAL_STATUS" required>
+                <option value="0">Unknown</option>
+                <option value="1">Single</option>
+                <option value="2">Married</option>
+            </select>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction %}
+        <div class="result" id="predictionResult">
+            <h3>Prediction: {{ prediction }}</h3>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
